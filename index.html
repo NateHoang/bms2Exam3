@@ -1,0 +1,520 @@
+<!doctype html>
+<html>
+  <head>
+    <title>BMS2 Cheatsheet</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu",
+          "Droid Sans", sans-serif, "Meiryo";
+        padding: 0 12px;
+      }
+
+      table {
+        border-collapse: collapse;
+        margin-bottom: 24px;
+        width: 100%;
+      }
+      table > thead > tr > th,
+      table > tbody > tr > td {
+        padding: 5px 10px;
+      }
+      table > thead > tr > th {
+        text-align: left;
+        border-bottom: 1px solid;
+      }
+      table > tbody > tr + tr > td {
+        border-top: 1px solid;
+      }
+
+      .tooltip {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+      }
+      .tooltip img {
+        display: none;
+        position: absolute;
+        width: var(--tooltip-img-width, 300px);
+        height: auto;
+        border: 2px solid #f00;
+        background: #ffffcc;
+        padding: 5px;
+        z-index: 10;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(10px);
+        max-width: 90vw; /* ✅ prevents image from exceeding viewport width */
+        max-height: 80vh; /* ✅ keeps image inside visible page vertically */
+        object-fit: contain;
+        box-sizing: border-box;
+      }
+
+      .tooltip[data-position="below"] img {
+        bottom: auto;
+        top: 100%;
+      }
+
+      .tooltip:hover img {
+        display: block;
+        /* Reposition if too close to top or bottom of viewport */
+        top: auto;
+        bottom: auto;
+      }
+
+      .blurred {
+        filter: blur(3px);
+        transition: filter 0.3s ease;
+      }
+
+      table td:not(:first-child),
+      table td li {
+        cursor: pointer;
+      }
+
+      summary {
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 16px 0;
+      }
+
+      details {
+        border: 2px solid #444;
+        border-radius: 8px;
+        padding: 10px;
+        background: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Protected Content</h2>
+    <p>Please enter the password to view the content:</p>
+    <input type="password" id="password" placeholder="Enter password" />
+    <button onclick="checkPassword()">Submit</button>
+    <div id="content" style="display: none; margin-top: 20px">
+      <!-- <div> -->
+      <div class="blur-buttons">
+        <button id="blurAll">Blur All (Press spacebar to blur)</button>
+        <button id="unblurAll">Unblur All (Press spacebar to unblue)</button>
+        <button
+          id="shuffleAllTables"
+          title="Shuffle each table's rows within its own details block"
+        >
+          Shuffle Tables (Press z to shuffle)
+        </button>
+        <button
+          id="resetTables"
+          title="Reset all tables to their original order"
+        >
+          Reset Tables (Press X to unshuffle)
+        </button>
+      </div>
+      <br />
+      <details>
+        <summary>Lecture 1: Introduction to Immunology</summary>
+        <h2>Granulocytes</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Cell Type</th>
+              <th>Phagocytic Type</th>
+              <th>Nucleus Type</th>
+              <th>Cytoplasm</th>
+              <th>Staining</th>
+              <th>Primary Functions / Roles</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Neutrophils</strong></td>
+              <td><strong>Phagocytes</strong></td>
+              <td><strong>Multi-lobed nucleus</strong></td>
+              <td>-</td>
+              <td>-</td>
+              <td>
+                <li>Dominant first responders</li>
+                <li>
+                  Phagocytose bacteria and secrete antimicrobial and tissue
+                  remodeling proteins.
+                </li>
+                <li>Main cellular components of pus</li>
+                <li>Short lifespan of only 1-2 days</li>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Eosinophils</strong></td>
+              <td><strong>Motile Phagocytic Cells</strong></td>
+              <td><strong>Bi-lobed nucleus</strong></td>
+              <td>-</td>
+              <td>Binds to acid dyes like eosin (Smears red)</td>
+              <td>
+                <li>
+                  Defense against multicellular parasites (worms) and fungal
+                  infections.
+                </li>
+                <li>Contribute to allergic reactions and asthma</li>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Basophils</strong></td>
+              <td><strong>Non-phagocytic</strong></td>
+              <td><strong>Kidney-bean shaped nucleus</strong></td>
+              <td>-</td>
+              <td>Bind basic dyes = blue color in stained blood smears</td>
+              <td>
+                Major contributor to allergy symptoms via histamine release.
+                <ul>
+                  <li>↑cell permability</li>
+                  <li>Smooth muscle contraction</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Mast Cells</strong></td>
+              <td>
+                <strong> Non-phagocytic </strong>
+              </td>
+              <td><strong>Large central nucleus</strong></td>
+              <td>Cytoplasmic granules that contains histamine</td>
+              <td>-</td>
+              <td>
+                Mature mast cells are adherent to small blood vessels in a wide
+                variety of tissues
+                <ul>
+                  <li>Skin</li>
+                  <li>Mucosal epithelial tissue of the respiratory</li>
+                  <li>Genitourinary tracts</li>
+                  <li>Digestive tracts</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Myeloid Antigen Presenting Cells</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Cell Type</th>
+              <th>Phagocytic Type</th>
+              <th>Nucleus Type</th>
+              <th>Cytoplasm</th>
+              <th>Staining</th>
+              <th>Primary Functions / Roles</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Monocytes</strong></td>
+              <td><strong>Mononuclear Phagocytic Cells</strong></td>
+              <td><strong>Kidney bean-shaped nucleus</strong></td>
+              <td>
+                <li>Finely granular cytoplasm</li>
+                <li>Cytoskeletal filaments</li>
+              </td>
+              <td>-</td>
+              <td>Differentiate into macrophages and dendritic cells</td>
+            </tr>
+            <tr>
+              <td><strong>Macrophages</strong></td>
+              <td><strong>Mononuclear Phagocytes</strong></td>
+              <td><strong>Mononuclear</strong> (Single nucleus)</td>
+              <td>-</td>
+              <td>-</td>
+              <td>
+                <strong>Tissue-resident macrophages</strong>
+                <ul>
+                  <li><strong>Bone: </strong>Osteoclasts</li>
+                  <li><strong>CNS &amp; Brain: </strong>Microglial cells</li>
+                  <li><strong>Lungs: </strong>Alveolar macrophages</li>
+                  <li><strong>Liver: </strong>Kupffer cells</li>
+                  <li><strong>Skin/Oral Mucosa: </strong>Langerhans cells</li>
+                  <li>
+                    <strong>Spleen: </strong>Red pulp macrophages to scavenge
+                    RBCs and recycle iron
+                  </li>
+                  <li>
+                    <strong>Heart: </strong>Cardiac resident macrophages promote
+                    angiogenesis, remove ageing and dying cells and participate
+                    in cardiac electrical condution. Play a role in CVS and
+                    cardiac physiology
+                  </li>
+                </ul>
+                <strong>Recruited or monocyte-derived</strong>
+                <ul>
+                  <li>Migrate into tissues during a response to infection</li>
+                  <li>
+                    <strong>M1 macrophages (Classically activated): </strong>
+                    inflammatory macrophages that ingest microbes and activate
+                    the adaptive immunity
+                  </li>
+                  <li>
+                    <strong>M2 Macrophages (Alternatively activated): </strong
+                    >Macrophages have immunosuppressive and tissue remodeling
+                    phenotype
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Dendritic Cells</strong></td>
+              <td><strong>Phagocytic Cells</strong></td>
+              <td>
+                <strong>Irregularly shaped</strong> (with long cytoplasmic
+                processes)
+              </td>
+              <td>-</td>
+              <td>-</td>
+              <td>
+                <li>Act as a bridge between innate and adaptive responses</li>
+                <li>
+                  Capture and present antigens→present antigen to
+                  T-cells→Initiates adaptive immune response
+                </li>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
+    <style>
+      /* same as before */
+      .blurred {
+        filter: blur(10px);
+        transition: filter 0.3s ease;
+      }
+
+      /* Make clickable cursor for td */
+      table td:not(:first-child) {
+        cursor: pointer;
+      }
+
+      /* li inside blurred td will inherit blur from parent */
+      table td.blurred li {
+        filter: inherit;
+      }
+
+      .blur-buttons {
+        text-align: center;
+        margin-bottom: 16px;
+      }
+      .blur-buttons button {
+        margin: 0 5px;
+        padding: 5px 12px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .blur-section li {
+        cursor: pointer;
+        margin-bottom: 6px;
+      }
+
+      /* Blur effect same as td */
+      .blur-section li.blurred {
+        filter: blur(10px);
+        transition: filter 0.3s ease;
+      }
+
+      /* Override for bold text so it always stays clear */
+      .blur-section li.blurred b {
+        filter: none !important;
+      }
+
+      .blur-section .blur-target {
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .blurred {
+        filter: blur(10px);
+        transition: filter 0.3s ease;
+      }
+    </style>
+    <script>
+      // === BLUR LOGIC (delegated for reliability after resets) ===
+      document.addEventListener("DOMContentLoaded", () => {
+        // Delegated click: blur targets
+        document.addEventListener("click", (e) => {
+          const target = e.target;
+          // Blur targets: any table td except first-child, or elements with class 'blur-target'
+          const blurTarget =
+            target.closest("td:not(:first-child)") ||
+            target.closest(".blur-target");
+          if (blurTarget) {
+            blurTarget.classList.toggle("blurred");
+          }
+        });
+
+        // Space toggles all blurables
+        document.addEventListener("keydown", (event) => {
+          if (event.code === "Space") {
+            const blurCells = document.querySelectorAll(
+              "table td:not(:first-child), .blur-section .blur-target",
+            );
+            const allBlurred = Array.from(blurCells).every((cell) =>
+              cell.classList.contains("blurred"),
+            );
+            blurCells.forEach((cell) => {
+              if (allBlurred) cell.classList.remove("blurred");
+              else cell.classList.add("blurred");
+            });
+            event.preventDefault();
+          }
+        });
+
+        // Buttons (if present)
+        const blurAllBtn = document.getElementById("blurAll");
+        const unblurAllBtn = document.getElementById("unblurAll");
+        if (blurAllBtn) {
+          blurAllBtn.addEventListener("click", () => {
+            document
+              .querySelectorAll(
+                "table td:not(:first-child), .blur-section .blur-target",
+              )
+              .forEach((el) => el.classList.add("blurred"));
+          });
+        }
+        if (unblurAllBtn) {
+          unblurAllBtn.addEventListener("click", () => {
+            document
+              .querySelectorAll(
+                "table td:not(:first-child), .blur-section .blur-target",
+              )
+              .forEach((el) => el.classList.remove("blurred"));
+          });
+        }
+      });
+
+      // === CUSTOM HEADER ELEMENT (unchanged) ===
+      class MyHeader extends HTMLElement {
+        connectedCallback() {
+          const text = this.innerHTML.trim() || "Section Title";
+
+          this.innerHTML = `
+        <div
+          style="
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            --tooltip-img-width: 400px;
+          "
+        >
+          ${text}
+        </div>
+        <br />
+      `;
+        }
+      }
+      customElements.define("my-header", MyHeader);
+
+      // === PASSWORD CHECK (unchanged) ===
+      function checkPassword() {
+        const enteredPassword = document.getElementById("password").value;
+        const correctPassword = "";
+        if (enteredPassword === correctPassword) {
+          document.getElementById("content").style.display = "block";
+          document.querySelector("h2").style.display = "none";
+          document.querySelector("p").style.display = "none";
+          document.getElementById("password").style.display = "none";
+          event.target.style.display = "none";
+        } else {
+          alert("Incorrect password. Please try again.");
+        }
+      }
+
+      // === SHUFFLE LOGIC (per-table inside details blocks) ===
+      function shuffleRowsInTable(table) {
+        const tbody = table.querySelector("tbody");
+        if (!tbody) return;
+
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        if (rows.length <= 1) return;
+
+        // Detach all rows
+        rows.forEach((row) => tbody.removeChild(row));
+
+        // Fisher-Yates shuffle
+        for (let i = rows.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [rows[i], rows[j]] = [rows[j], rows[i]];
+        }
+
+        // Re-attach in new order
+        for (const row of rows) tbody.appendChild(row);
+      }
+
+      /* Capture the original order of rows for all tables inside details blocks (on page load) */
+      function captureOriginalOrder() {
+        const data = new Map();
+        document.querySelectorAll("details table").forEach((tbl) => {
+          const tbody = tbl.querySelector("tbody");
+          if (!tbody) return;
+          const order = Array.from(tbody.querySelectorAll("tr")).map((tr) =>
+            tr.cloneNode(true),
+          );
+          data.set(tbl, order);
+        });
+        return data;
+      }
+
+      /* Restore original order for all tables inside details blocks */
+      function resetTablesToOriginal(orderMap) {
+        orderMap.forEach((originalRows, tbl) => {
+          const tbody = tbl.querySelector("tbody");
+          if (!tbody) return;
+          // Remove current rows
+          const current = Array.from(tbody.querySelectorAll("tr"));
+          current.forEach((row) => tbody.removeChild(row));
+
+          // Append copies in original order
+          originalRows.forEach((row) => tbody.appendChild(row.cloneNode(true)));
+        });
+      }
+
+      /* Shuffle every table inside every details block independently */
+      function shuffleAllTablesInDetails() {
+        const detailsBlocks = document.querySelectorAll("details");
+        detailsBlocks.forEach((det) => {
+          det.querySelectorAll("table").forEach((tbl) => {
+            shuffleRowsInTable(tbl);
+          });
+        });
+      }
+
+      /* Wire up UI and keyboard shortcuts (Z to shuffle, X to reset) */
+      document.addEventListener("DOMContentLoaded", () => {
+        // Prepare original order snapshot
+        const originalOrder = captureOriginalOrder();
+
+        // Button handlers
+        const btnShuffle = document.getElementById("shuffleAllTables");
+        if (btnShuffle) {
+          btnShuffle.addEventListener("click", () => {
+            shuffleAllTablesInDetails();
+          });
+        }
+
+        const btnReset = document.getElementById("resetTables");
+        if (btnReset) {
+          btnReset.addEventListener("click", () => {
+            resetTablesToOriginal(originalOrder);
+          });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener("keydown", (event) => {
+          const key = event.key.toLowerCase();
+          if (key === "z") {
+            shuffleAllTablesInDetails();
+            event.preventDefault();
+          } else if (key === "x") {
+            resetTablesToOriginal(originalOrder);
+            event.preventDefault();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
